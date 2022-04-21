@@ -1,12 +1,22 @@
 import React from 'react'
 import {Card} from 'react-bootstrap';
 
-const TheOneBook = (props) => (
-    <Card>
-        <Card.Img variant="top" src={props.book.img} />
+class TheOneBook extends React.Component {
+
+    state = {
+        selected: false
+    }
+
+    render(){
+return (
+    <Card onClick={() => this.setState({ selected: !this.state.selected})}
+    style={{border: this.state.selected ? '4px solid yellow' : '1px solid black'}}>
+        <Card.Img variant="top" src={this.props.book.img} />
         <Card.Body>
-            <Card.Title>{props.book.title}</Card.Title>
+            <Card.Title>{this.props.book.title}</Card.Title>
             </Card.Body>
         </Card>
 )
+}
+}
         export default TheOneBook;

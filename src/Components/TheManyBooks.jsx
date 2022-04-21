@@ -24,7 +24,7 @@ render() {
     </Row>
     <Row>
         {
-            this.props.books.map(b => (
+            this.props.books.filter(b => b.title.toLowerCase().includes(this.state.searchQuery)).map(b => (
                 <Col xs={2}>
                 <TheOneBook book={b}/>
                 </Col>
