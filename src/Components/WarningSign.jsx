@@ -1,19 +1,11 @@
 import React from 'react'
-
 import {Alert} from 'react-bootstrap'
 
-function WarningSign() {
-    
-   
-      return (
+const WarningSign = (props) => (
         <Alert variant="danger" >
-          <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-          <p>
-            Warning
-          </p>
+         {props.text}
         </Alert>
       );
-    }
  
 
  export default WarningSign;

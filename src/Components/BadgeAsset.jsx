@@ -2,7 +2,7 @@ import React from 'react'
 import {Badge} from 'react-bootstrap'
 
 
-const BadgeAsset =(helloGuys) => {
-    <Badge pill variant={helloGuys.color}>{helloGuys.text}</Badge>
-}
+const BadgeAsset =(prop) => (
+    <Badge variant={prop.color}>{prop.text}</Badge>
+)
 export default BadgeAsset
