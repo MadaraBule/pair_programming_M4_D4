@@ -1,5 +1,6 @@
 import React from 'react'
 import {Card } from 'react-bootstrap';
+import AddComment from './AddComment';
 import Comments from './Comments';
 
 class TheOneBook extends React.Component {
@@ -19,6 +20,7 @@ class TheOneBook extends React.Component {
                     <Card.Text>
                     </Card.Text>
                     <Comments comments={this.state.comments} />
+                    <AddComment />
                 </Card.Body>
             </Card>
         )
