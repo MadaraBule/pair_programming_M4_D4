@@ -4,6 +4,7 @@ import {Col, Container, Form, Row} from "react-bootstrap";
 
 class TheManyBooks extends React.Component {
 state = {
+    comments: [],
     searchQuery: ''
 }
 render() {
