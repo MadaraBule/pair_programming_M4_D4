@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, Form, Col } from 'react-bootstrap'
-const AddComment =
-<Form>
+const AddComment = () => {
+<Form onSubmit={this.handleSubmit}>
 <Form.Group>
     <Form.Label>Comment on book</Form.Label>
-    <Form.Control as="textarea" rows={3} />
+    <Form.Control as="textarea" value={this.state.value} rows={3} />
   </Form.Group>
   <Form.Row>
     <Col xs="auto" className="my-1">
@@ -28,11 +28,21 @@ const AddComment =
     </Form.Row>
     <Button>Submit</Button>
 </Form>
-    const resp = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.bookInfo.asin, {
+
+try {
+   const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
         method: 'POST',
-        body: JSON.stringify,
+        body: JSON.stringify(this.state.AddComment),
         headers: {
+            'Content-type': 'application/json',
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU2YmU1Y2E5MDIzOTAwMTVkOTY1ZDIiLCJpYXQiOjE2NTA2Mjk4ODMsImV4cCI6MTY1MTgzOTQ4M30.OpOPM6TnHE4ppJTB-f6ZrhEwTspIxuh9U6yg3Y0eCRc"
         }
     })
+    if (response.ok) {
+        alert('comment posted')
+      }
+    } catch (e) {
+        console.log(e)
+    }
+}
 export default AddComment
