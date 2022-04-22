@@ -42,7 +42,7 @@ import React from 'react'
 try {
    const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
         method: 'POST',
-        body: JSON.stringify(this.state.AddComment),
+        body: JSON.stringify(...this.state.AddComment),
         headers: {
             'Content-type': 'application/json',
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU2YmU1Y2E5MDIzOTAwMTVkOTY1ZDIiLCJpYXQiOjE2NTA2Mjk4ODMsImV4cCI6MTY1MTgzOTQ4M30.OpOPM6TnHE4ppJTB-f6ZrhEwTspIxuh9U6yg3Y0eCRc"
