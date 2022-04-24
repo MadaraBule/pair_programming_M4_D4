@@ -1,57 +1,90 @@
-import React from 'react'
+import { Component } from "react";
+import { Button, Form } from "react-bootstrap";
 
-    class AddComment extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {value: '1'};
-      
-          this.handleChange = this.handleChange.bind(this);
-          this.handleSubmit = this.handleSubmit.bind(this);
-        }
-      
-        handleChange(event) {
-          this.setState({value: event.target.value});
-        }
-      
-        handleSubmit(event) {
-          event.preventDefault();
-        }
-      
-        render() {
-          return (
-            <form onSubmit={this.handleSubmit}>
-              <label>
-               Rate the book
-                <select value={this.state.value} onChange={this.handleChange}>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </label>
-              <label>
-          Rate the Book
-          <textarea value={this.state.value} onChange={this.handleChange} />
-        </label>
-              <input type="submit" value="Submit" />
-            </form>
-          );
-        }
-      }
-try {
-   const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
-        method: 'POST',
-        body: JSON.stringify(...this.state.AddComment),
-        headers: {
-            'Content-type': 'application/json',
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU2YmU1Y2E5MDIzOTAwMTVkOTY1ZDIiLCJpYXQiOjE2NTA2Mjk4ODMsImV4cCI6MTY1MTgzOTQ4M30.OpOPM6TnHE4ppJTB-f6ZrhEwTspIxuh9U6yg3Y0eCRc"
-        }
-    })
-    if (response.ok) {
-        alert('comment posted')
-      }
-    } catch (e) {
-        console.log(e)
+class AddComment extends Component {
+  state = {
+    comment: {
+      comment: "",
+      rate: 1,
+      elementId: this.props.asin
     }
-export default AddComment
+  };
+
+  sendComment = async (e) => {
+    e.preventDefault();
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments",
+        {
+          method: "POST",
+          body: JSON.stringify(this.state.comment),
+          headers: {
+            "Content-type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU2YmU1Y2E5MDIzOTAwMTVkOTY1ZDIiLCJpYXQiOjE2NTA4Mjk3NTMsImV4cCI6MTY1MjAzOTM1M30.uVlMZjkhUUB8Qr6Conm8BYQtmMUhiUiknYf3x0UKQks"
+          }
+        }
+      );
+      if (response.ok) {
+        // the comment has been sent succesfully!!
+        alert("Comment sent");
+      } else {
+        console.log("error");
+        alert("Something went wrong");
+      }
+    } catch (error) {
+      console.log("Error");
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <Form onSubmit={this.sendComment}>
+          <Form.Group>
+            <Form.Label>Comment text</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Add comment here"
+              value={this.state.comment.comment}
+              onChange={(e) =>
+                this.setState({
+                  comment: {
+                    ...this.state.comment,
+                    comment: e.target.value
+                  }
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Rate</Form.Label>
+            <Form.Control
+              as="select"
+              value={this.state.comment.rate}
+              onChange={(e) =>
+                this.setState({
+                  comment: {
+                    ...this.state.comment,
+                    rate: e.target.value
+                  }
+                })
+              }
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Form.Control>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </div>
+    );
+  }
+}
+
+export default AddComment;

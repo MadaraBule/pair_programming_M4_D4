@@ -1,19 +1,14 @@
-import React, {Component} from 'react'
-import CommentListItem from './CommentArea'
+import { ListGroup } from 'react-bootstrap'
+import SingleComment from './SingleComment'
 
-class  Comments extends Component {
- 
-    state = {
-        selected: false,
+const Comments = ({ commentsToShow }) => (
+    <ListGroup style={{ color: 'black' }}>
+        {
+            commentsToShow.map(comment => (
+                <SingleComment comment={comment} key={comment._id} />
+            ))
+        }
+    </ListGroup>
+)
 
-    }
-
-render() {
-    return (
-        <ul>
-                   {this.props.comments && this.props.comments.map(comments => <CommentListItem key={comments._id} comment={comments} />)}
-        </ul>
-    )
-}
-}
 export default Comments

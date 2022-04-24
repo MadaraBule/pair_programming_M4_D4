@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card } from 'react-bootstrap';
 import AddComment from './AddComment';
+import CommentArea from './CommentArea';
 import Comments from './Comments';
 
 class TheOneBook extends React.Component {
@@ -22,19 +23,10 @@ class TheOneBook extends React.Component {
                     <Comments comments={this.state.comments} />
                     <AddComment />
                 </Card.Body>
-            </Card>
-        )
-    }
-    componentDidMount = async () => {
-        const resp = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.bookInfo.asin, {
-            headers: {
-                method:"GET",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU2YmU1Y2E5MDIzOTAwMTVkOTY1ZDIiLCJpYXQiOjE2NTA2Mjk4ODMsImV4cCI6MTY1MTgzOTQ4M30.OpOPM6TnHE4ppJTB-f6ZrhEwTspIxuh9U6yg3Y0eCRc"
+            </Card>{
+            this.state.selected && <CommentArea asin={this.props.book.asin} />
             }
-            })
-            const gottenComments = await resp.json()
-            this.setState({ comments: gottenComments })
             
-}
+    }
 }
 export default TheOneBook
