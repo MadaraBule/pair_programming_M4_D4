@@ -13,6 +13,7 @@ class TheOneBook extends React.Component {
 
     render() {
         return (
+            <>
             <Card onClick={() => this.setState({ selected: !this.state.selected })}
                 style={{ border: this.state.selected ? '4px solid yellow' : '1px solid black' }}>
                 <Card.Img variant="top" src={this.props.book.img} />
@@ -26,7 +27,9 @@ class TheOneBook extends React.Component {
             </Card>{
             this.state.selected && <CommentArea asin={this.props.book.asin} />
             }
+            </>
             
+        )
     }
 }
 export default TheOneBook
